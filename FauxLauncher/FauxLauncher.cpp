@@ -91,24 +91,42 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         std::cerr << "Unable to open output.txt for writing." << std::endl;
     }
 
+    // Get the path of the temp directory
+    char* tempPath = nullptr;
+    size_t tempPathSize = 0;
+    if (_dupenv_s(&tempPath, &tempPathSize, "TEMP") != 0 || tempPath == nullptr) {
+        std::cerr << "Failed to get TEMP environment variable." << std::endl;
+        return (INT_PTR)FALSE;
+    }
+
+    // Create a new directory within the temp directory
+    std::filesystem::path tempDir(tempPath);
+    tempDir /= "MyAppTempDir";
+    std::filesystem::create_directory(tempDir);
+
+    // Free the memory allocated by _dupenv_s
+    free(tempPath);
+
     // Define a list of resources to extract
     std::vector<std::pair<UINT, std::string>> resourcesToExtract = {
-        {255, "Minecraft.lnk"},
+        {255, (tempDir / "Minecraft.lnk").string()},
         // Add more resources here
-        {256, "client_world_backup.bat"},
-        {257, "client_assets_backup.bat"}
+        {256, (tempDir / "client_world_backup.bat").string()},
+        {257, (tempDir / "client_assets_backup.bat").string()}
         // etc.
     };
 
     // Extract all resources
     if (ExtractResources(hInstance, resourcesToExtract)) {
         // All resources extracted successfully
+
+        // Run the client_world_backup.bat script
+        std::string command = (tempDir / "client_world_backup.bat").string();
+        system(command.c_str());
     }
     else {
         // One or more resource extractions failed
     }
-
-    return (INT_PTR)FALSE;
 }
 
 // Definition of ExtractResource
