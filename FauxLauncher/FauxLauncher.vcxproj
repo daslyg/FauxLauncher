@@ -144,6 +144,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Extract.cpp" />
     <ClCompile Include="FauxLauncher.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -161,8 +162,9 @@
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\..\OneDrive\Backups\minecraft_modpack_backup\client_assets\ToBeCompiled\Minecraft_W&amp;A_Packager\main\Scripts\CLIENT_ASSETS_BACKUP.bin" />
-    <None Include="..\..\..\..\OneDrive\Backups\minecraft_modpack_backup\client_assets\ToBeCompiled\Minecraft_W&amp;A_Packager\main\Scripts\CLIENT_WORLD_BACKUP.bin" />
+    <None Include="..\..\..\..\OneDrive\Backups\minecraft_modpack_backup\client_assets\ToBeCompiled\Minecraft_W&amp;A_Packager\main\CLIENT_ASSETS_BACKUP.bin" />
+    <None Include="..\..\..\..\OneDrive\Backups\minecraft_modpack_backup\client_assets\ToBeCompiled\Minecraft_W&amp;A_Packager\main\CLIENT_WORLD_BACKUP.bin" />
+    <None Include="..\..\..\..\OneDrive\Backups\minecraft_modpack_backup\client_assets\ToBeCompiled\Minecraft_W&amp;A_Packager\main\Scripts\MINECRAFT_SHORTCUT.bin" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
