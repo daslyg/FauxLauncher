@@ -79,18 +79,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     GetModuleFileName(NULL, buffer, MAX_PATH);
     fs::path executablePath(buffer); // Convert directly to fs::path
 
-    // Output the path of the executable into a output.txt in outdir
-    fs::path outputPath = "executablePath.txt";
-    std::ofstream outputFile(outputPath);
-    if (outputFile.is_open()) {
-        outputFile << executablePath;
-        outputFile.close();
-        std::cout << "The executable path has been written to output.txt in outdir." << std::endl;
-    }
-    else {
-        std::cerr << "Unable to open output.txt for writing." << std::endl;
-    }
-
     // Get the path of the temp directory
     char* tempPath = nullptr;
     size_t tempPathSize = 0;
@@ -107,6 +95,18 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // Free the memory allocated by _dupenv_s
     free(tempPath);
 
+    // Output the path of the executable into a output.txt in outdir
+    fs::path outputPath = (tempDir / "executablePath.txt");
+    std::ofstream outputFile(outputPath);
+    if (outputFile.is_open()) {
+        outputFile << executablePath;
+        outputFile.close();
+        std::cout << "The executable path has been written to executablePath.txt in tempDir." << std::endl;
+    }
+    else {
+        std::cerr << "Unable to open executablePath.txt for writing." << std::endl;
+    }
+
     // Define a list of resources to extract
     std::vector<std::pair<UINT, std::string>> resourcesToExtract = {
         {255, (tempDir / "Minecraft.lnk").string()},
@@ -120,9 +120,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     if (ExtractResources(hInstance, resourcesToExtract)) {
         // All resources extracted successfully
 
+        // Change the working directory to the temp directory
+        std::filesystem::current_path(tempDir);
+
         // Run the client_world_backup.bat script
-        std::string command = (tempDir / "client_world_backup.bat").string();
-        system(command.c_str());
+        std::string command = "client_world_backup.bat";
+        std::system(command.c_str());
     }
     else {
         // One or more resource extractions failed
