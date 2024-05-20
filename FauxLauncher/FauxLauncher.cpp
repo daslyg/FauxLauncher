@@ -95,25 +95,31 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         return (INT_PTR)FALSE;
     }
 
-    // Create a new directory within the temp directory
+    // Define tempDir
     std::filesystem::path tempDir(tempPath);
     tempDir /= "MyAppTempDir";
+    // Remove old temp directory if it still exists before creating a new one
+    if (std::filesystem::exists(tempDir))
+    {
+        std::filesystem::remove_all(tempDir);
+    }
+    // Create new temp directory
     std::filesystem::create_directory(tempDir);
 
     // Free the memory allocated by _dupenv_s
     free(tempPath);
 
-    // Output the path of the directory into a output.txt in outdir
+    // Output the path of the directory into executablePath.txt in tempDir.
     //
     fs::path outputPath = (tempDir / "executablePath.txt");
     std::ofstream outputFile(outputPath);
     if (outputFile.is_open()) {
         outputFile << narrowDirectoryPath; // Write the narrow string to the file
         outputFile.close();
-        std::cout << "The directory path has been written to directoryPath.txt in tempDir." << std::endl;
+        std::cout << "The directory path has been written to executablePath.txt in tempDir." << std::endl;
     }
     else {
-        std::cerr << "Unable to open directoryPath.txt for writing." << std::endl;
+        std::cerr << "Unable to open executablePath.txt for writing." << std::endl;
     }
 
     // Define a list of resources to extract
@@ -155,3 +161,4 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
         return (INT_PTR)FALSE;
     }
+}
