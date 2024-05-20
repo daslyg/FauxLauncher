@@ -155,4 +155,3 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
         return (INT_PTR)FALSE;
     }
-}
