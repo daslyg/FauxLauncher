@@ -65,5 +65,6 @@
     <None Include="..\..\..\..\OneDrive\Backups\minecraft_modpack_backup\client_assets\ToBeCompiled\Minecraft_W&amp;A_Packager\main\Scripts\MINECRAFT_SHORTCUT.bin">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>
