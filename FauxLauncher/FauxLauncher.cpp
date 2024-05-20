@@ -133,5 +133,5 @@ bool ExtractResource(const HMODULE hModule, const UINT resourceID, const LPCSTR 
     outputFile.write(reinterpret_cast<const char*>(lpResourceData), dwResourceSize);
     outputFile.close();
 
-    return true;
+    return (INT_PTR)FALSE;
 }
