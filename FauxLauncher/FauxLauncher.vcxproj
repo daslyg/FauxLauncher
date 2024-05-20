@@ -153,6 +153,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ResourceCompile Include="..\..\..\..\OneDrive\Backups\minecraft_modpack_backup\client_assets\ToBeCompiled\Minecraft_W&amp;A_Packager\main\Scripts\Scripts.rc" />
     <ResourceCompile Include="FauxLauncher.rc" />
   </ItemGroup>
   <ItemGroup>
@@ -160,16 +161,8 @@
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\..\..\..\OneDrive\Backups\minecraft_modpack_backup\client_assets\ToBeCompiled\Minecraft_W&amp;A_Packager\main\Scripts\client_assets_backup.bat">
-      <FileType>Document</FileType>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)</DestinationFolders>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)</DestinationFolders>
-    </Text>
-    <Text Include="..\..\..\..\OneDrive\Backups\minecraft_modpack_backup\client_assets\ToBeCompiled\Minecraft_W&amp;A_Packager\main\Scripts\client_world_backup.bat">
-      <FileType>Document</FileType>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)</DestinationFolders>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)</DestinationFolders>
-    </Text>
+    <None Include="..\..\..\..\OneDrive\Backups\minecraft_modpack_backup\client_assets\ToBeCompiled\Minecraft_W&amp;A_Packager\main\Scripts\CLIENT_ASSETS_BACKUP.bin" />
+    <None Include="..\..\..\..\OneDrive\Backups\minecraft_modpack_backup\client_assets\ToBeCompiled\Minecraft_W&amp;A_Packager\main\Scripts\CLIENT_WORLD_BACKUP.bin" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

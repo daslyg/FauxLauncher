@@ -49,12 +49,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     GetModuleFileName(NULL, buffer, MAX_PATH);
     fs::path executablePath(buffer); // Convert directly to fs::path
 
-    // Create the outdir directory if it doesn't exist
-    fs::path outdir = executablePath.parent_path() / "outdir";
-    fs::create_directories(outdir);
-
     // Output the path of the executable into a output.txt in outdir
-    fs::path outputPath = outdir / "executablePath.txt";
+    fs::path outputPath ="executablePath.txt";
     std::ofstream outputFile(outputPath);
     if (outputFile.is_open()) {
         outputFile << executablePath;
