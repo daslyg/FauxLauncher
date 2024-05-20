@@ -104,6 +104,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     free(tempPath);
 
     // Output the path of the directory into a output.txt in outdir
+    //
     fs::path outputPath = (tempDir / "executablePath.txt");
     std::ofstream outputFile(outputPath);
     if (outputFile.is_open()) {
