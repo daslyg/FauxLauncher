@@ -138,8 +138,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         // Change the working directory to the temp directory
         std::filesystem::current_path(tempDir);
 
-        // Run the client_world_backup.bat script
-        std::string command = "client_world_backup.bat";
+        // Run the client_world_backup.bat script minimized
+        std::string command = "cmd.exe /c start /min \"\" \"client_world_backup.bat\" ^& exit";
         std::system(command.c_str());
     }
     else {
