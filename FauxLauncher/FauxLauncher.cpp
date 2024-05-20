@@ -75,9 +75,17 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     namespace fs = std::filesystem;
 
     // Get the path of the executable
+    //
     WCHAR buffer[MAX_PATH];
     GetModuleFileName(NULL, buffer, MAX_PATH);
     fs::path executablePath(buffer); // Convert directly to fs::path
+
+    // Get the parent directory of the executable
+    fs::path directoryPath = executablePath.parent_path();
+
+    // Convert wide string to narrow string
+    std::wstring wideDirectoryPath = directoryPath.wstring();
+    std::string narrowDirectoryPath(wideDirectoryPath.begin(), wideDirectoryPath.end());
 
     // Get the path of the temp directory
     char* tempPath = nullptr;
@@ -95,16 +103,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // Free the memory allocated by _dupenv_s
     free(tempPath);
 
-    // Output the path of the executable into a output.txt in outdir
+    // Output the path of the directory into a output.txt in outdir
     fs::path outputPath = (tempDir / "executablePath.txt");
     std::ofstream outputFile(outputPath);
     if (outputFile.is_open()) {
-        outputFile << executablePath;
+        outputFile << narrowDirectoryPath; // Write the narrow string to the file
         outputFile.close();
-        std::cout << "The executable path has been written to executablePath.txt in tempDir." << std::endl;
+        std::cout << "The directory path has been written to directoryPath.txt in tempDir." << std::endl;
     }
     else {
-        std::cerr << "Unable to open executablePath.txt for writing." << std::endl;
+        std::cerr << "Unable to open directoryPath.txt for writing." << std::endl;
     }
 
     // Define a list of resources to extract
