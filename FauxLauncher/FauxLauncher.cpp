@@ -13,9 +13,11 @@
 #include <chrono>
 #include <thread>
 #include <system_error>
-
 #include <windows.h>
-#include <shellapi.h>
+
+#include <vector>
+#include <utility> // For std::pair
+
 
 #define MAX_LOADSTRING 100
 
@@ -30,19 +32,46 @@ BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
-// Function prototype for ExtractResource
-bool ExtractResource(const HMODULE hModule, const UINT resourceID, const LPCSTR outputFilename);
+// Modify the ExtractResource function to accept a vector of pairs, each containing a resource ID and an output filename
+bool ExtractResources(const HMODULE hModule, const std::vector<std::pair<UINT, std::string>>& resources) {
+    bool allSucceeded = true;
+    for (const auto& [resourceID, outputFilename] : resources) {
+        HRSRC hResource = FindResource(hModule, MAKEINTRESOURCE(resourceID), RT_RCDATA);
+        if (hResource == NULL) {
+            allSucceeded = false;
+            continue;
+        }
+
+        HGLOBAL hLoadedResource = LoadResource(hModule, hResource);
+        if (hLoadedResource == NULL) {
+            allSucceeded = false;
+            continue;
+        }
+
+        LPVOID lpResourceData = LockResource(hLoadedResource);
+        if (lpResourceData == NULL) {
+            allSucceeded = false;
+            continue;
+        }
+
+        DWORD dwResourceSize = SizeofResource(hModule, hResource);
+        std::ofstream outputFile(outputFilename, std::ios::binary);
+        if (outputFile.is_open()) {
+            outputFile.write(reinterpret_cast<const char*>(lpResourceData), dwResourceSize);
+            outputFile.close();
+        }
+        else {
+            allSucceeded = false;
+        }
+    }
+    return allSucceeded;
+}
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     _In_opt_ HINSTANCE hPrevInstance,
     _In_ LPWSTR    lpCmdLine,
     _In_ int       nCmdShow)
 {
-    UNREFERENCED_PARAMETER(hPrevInstance);
-    UNREFERENCED_PARAMETER(lpCmdLine);
-
-    // TODO: Place code here.
-
     namespace fs = std::filesystem;
 
     // Get the path of the executable
@@ -62,13 +91,21 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         std::cerr << "Unable to open output.txt for writing." << std::endl;
     }
 
-    // Replace 'YOUR_RESOURCE_ID' with the actual resource ID
-    // Replace 'YOUR_OUTPUT_FILENAME' with the desired output file name
-    if (ExtractResource(hInstance, 255, "Minecraft.lnk")) {
-        // Resource extraction succeeded
+    // Define a list of resources to extract
+    std::vector<std::pair<UINT, std::string>> resourcesToExtract = {
+        {255, "Minecraft.lnk"},
+        // Add more resources here
+        {256, "client_world_backup.bat"},
+        {257, "client_assets_backup.bat"}
+        // etc.
+    };
+
+    // Extract all resources
+    if (ExtractResources(hInstance, resourcesToExtract)) {
+        // All resources extracted successfully
     }
     else {
-        // Resource extraction failed
+        // One or more resource extractions failed
     }
 
     return (INT_PTR)FALSE;
