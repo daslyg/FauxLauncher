@@ -40,16 +40,30 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     // TODO: Place code here.
 
+    // TODO: Place code here.
+
     namespace fs = std::filesystem;
 
     // Get the path of the executable
     WCHAR buffer[MAX_PATH];
     GetModuleFileName(NULL, buffer, MAX_PATH);
-    std::wstring wpath(buffer);
-    std::string path(wpath.begin(), wpath.end());
-    std::string executablePath = fs::path(path).parent_path().string();
+    fs::path executablePath(buffer); // Convert directly to fs::path
+
+    // Create the outdir directory if it doesn't exist
+    fs::path outdir = executablePath.parent_path() / "outdir";
+    fs::create_directories(outdir);
 
     // Output the path of the executable into a output.txt in outdir
+    fs::path outputPath = outdir / "executablePath.txt";
+    std::ofstream outputFile(outputPath);
+    if (outputFile.is_open()) {
+        outputFile << executablePath;
+        outputFile.close();
+        std::cout << "The executable path has been written to output.txt in outdir." << std::endl;
+    }
+    else {
+        std::cerr << "Unable to open output.txt for writing." << std::endl;
+    }
 
     return (INT_PTR)FALSE;
 }
