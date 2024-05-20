@@ -139,29 +139,19 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     else {
         // One or more resource extractions failed
     }
-}
 
-// Definition of ExtractResource
-bool ExtractResource(const HMODULE hModule, const UINT resourceID, const LPCSTR outputFilename) {
-    HRSRC hResource = FindResource(hModule, MAKEINTRESOURCE(resourceID), RT_RCDATA);
-    if (hResource == NULL) {
-        return false;
+    // Wait for all scripts to finish
+    for (auto p = fs::directory_iterator(tempDir); p != fs::directory_iterator(); ++p) {
+        if (p->path().extension() == ".lock") {
+            // A script is still running, wait and check again
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+            p = fs::directory_iterator(tempDir);  // Reset the iterator
+        }
     }
+    // Now all scripts have finished, remove the temporary directory
+    if (std::filesystem::exists(tempDir)) { // Check if tempDir exists before trying to remove it
+        std::filesystem::remove_all(tempDir);
 
-    HGLOBAL hLoadedResource = LoadResource(hModule, hResource);
-    if (hLoadedResource == NULL) {
-        return false;
+        return (INT_PTR)FALSE;
     }
-
-    LPVOID lpResourceData = LockResource(hLoadedResource);
-    if (lpResourceData == NULL) {
-        return false;
-    }
-
-    DWORD dwResourceSize = SizeofResource(hModule, hResource);
-    std::ofstream outputFile(outputFilename, std::ios::binary);
-    outputFile.write(reinterpret_cast<const char*>(lpResourceData), dwResourceSize);
-    outputFile.close();
-
-    return (INT_PTR)FALSE;
 }
