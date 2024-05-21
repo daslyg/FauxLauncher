@@ -48,14 +48,6 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="small.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="FauxLauncher.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="..\..\..\..\OneDrive\Backups\minecraft_modpack_backup\client_assets\ToBeCompiled\Minecraft_W&amp;A_Packager\main\Scripts\CLIENT_ASSETS_BACKUP.bin">
       <Filter>Resource Files</Filter>
     </None>
@@ -66,5 +58,13 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="cpp.hint" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="FauxLauncher.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
