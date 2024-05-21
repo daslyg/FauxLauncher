@@ -43,21 +43,21 @@
     <ResourceCompile Include="FauxLauncher.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-    <ResourceCompile Include="..\..\..\..\OneDrive\Backups\minecraft_modpack_backup\client_assets\ToBeCompiled\Minecraft_W&amp;A_Packager\main\Scripts\Scripts.rc">
+    <ResourceCompile Include="Scripts.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\..\OneDrive\Backups\minecraft_modpack_backup\client_assets\ToBeCompiled\Minecraft_W&amp;A_Packager\main\Scripts\CLIENT_ASSETS_BACKUP.bin">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\..\..\..\OneDrive\Backups\minecraft_modpack_backup\client_assets\ToBeCompiled\Minecraft_W&amp;A_Packager\main\Scripts\CLIENT_WORLD_BACKUP.bin">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\..\..\..\OneDrive\Backups\minecraft_modpack_backup\client_assets\ToBeCompiled\Minecraft_W&amp;A_Packager\main\Scripts\MINECRAFT_SHORTCUT.bin">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="cpp.hint" />
+    <None Include="CF_MINECRAFT_SHORTCUT.bin">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="CF_CLIENT_ASSETS_BACKUP.bin">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="CF_CLIENT_WORLD_BACKUP.bin">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
