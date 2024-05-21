@@ -2,8 +2,5 @@ Creates a Minecraft launcher shortcut, runs it, backs up your mods, resource pac
 
 Warning, .zips may be overwritten if they share the same name in your backup folder when the executable is run, and the executable is HARDCODED to work (as expected) when the launcher is set to stay open on game launch.
 
-Latest:
-FauxLauncher1.0.zip
-
 Requirements:
 Windows 11, Minecraft, 7-Zip
