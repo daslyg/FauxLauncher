@@ -19,6 +19,7 @@ for /d %%a in (*) do (
     "!program!" a -tzip "mods.zip" "!clientdir!\config"
     "!program!" a -tzip "!zipfile!" "!clientdir!\resourcepacks"
     "!program!" a -tzip "!zipfile!" "!clientdir!\shaderpacks"
+    "!program!" a -tzip "!zipfile!" "!clientdir!\options.txt"
 )
 
 :: Remove the assets folder after the zip file has been created
