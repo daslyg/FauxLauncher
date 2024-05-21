@@ -4,3 +4,5 @@ Warning, .zips may be overwritten if they share the same name in your backup fol
 
 Requirements:
 Windows 11, Minecraft, 7-Zip
+
+Downloads are available in the releases page.
