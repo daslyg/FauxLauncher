@@ -126,7 +126,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     // Get the parent directory of the executable
     fs::path directoryPath = executablePath.parent_path();
-    
+
     // Convert wide string to narrow string
     std::wstring wideDirectoryPath = directoryPath.wstring();
     std::string narrowDirectoryPath(wideDirectoryPath.begin(), wideDirectoryPath.end());
