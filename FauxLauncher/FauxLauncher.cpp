@@ -174,7 +174,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         // Add more resources here
         {256, (tempDir / "client_world_backup.bat").string()},
         {257, (tempDir / "client_assets_backup.bat").string()}
-        // etc.
     };
 
     // Extract all resources
