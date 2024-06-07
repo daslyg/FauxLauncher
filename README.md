@@ -9,6 +9,6 @@ Creates a Minecraft launcher shortcut, runs it, backs up your mods, resource pac
 Warning, .zips may be overwritten if they share the same name in your backup folder when the executable is run, and the executable is HARDCODED to work (as expected) when the launcher is set to stay open on game launch.
 
 ### **Requirements:**
-Windows 11, [Minecraft](https://www.minecraft.net/), [7-Zip](https://www.7-zip.org/)
+Windows 11, [Minecraft](https://www.minecraft.net/), [7-Zip](https://www.7-zip.org/)—(Only follow links you trust)
 
 Downloads are available in the releases page.
