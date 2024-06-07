@@ -1,4 +1,4 @@
-DISCLAIMER: This executable is self-extracting; Batch scripts are extracted and run upon execution, which can be considered a security vulnerability on some systems, most notably those with strict security policies, user discretion is advised.
+DISCLAIMER: This executable is self-extracting; Scripts are extracted and run upon execution, which can pose a security risk on some systems, most notably those with strict security policies, user discretion is advised.
 
 Creates a Minecraft launcher shortcut, runs it, backs up your mods, resource packs, options (like keybinds and stuff like that), and shaderpacks upon closure of the launcher. When Minecraft java edition is run, it will wait for it to close before backing up all the worlds in your .minecraft directory, each timestamped. All backups created by the .exe are in the same directory, so changing your backup folder is as simple as moving the executable. A log is created for debugging purposes.
 
