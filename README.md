@@ -8,3 +8,5 @@ Requirements:
 Windows 11, [Minecraft](https://www.minecraft.net/), [7-Zip](https://www.7-zip.org/)
 
 Downloads are available in the releases page.
+
+See also: [FalsLauncher (Vintage Story)](https://github.com/daslyg/FalsLauncher)
